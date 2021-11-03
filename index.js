@@ -22,9 +22,12 @@ function randoNumb(min,max) {
 start();
 
 async function start() {
+  //starting prompt
   console.log("Let's play a game where you (human) make up a number and I (computer) try to guess it.")
+  //assigns number to variable
   let secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n");
   console.log('You entered: ' + secretNumber);
+  //function to generate number to variable
   let compGuess = randoNumb(min,max)
   let answer = await ask('Is your number ' + compGuess + "?")
   if(answer === "y") {
