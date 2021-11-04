@@ -18,6 +18,10 @@ function randoNumb(min,max) {
   return min + Math.floor(Math.random() * range)
 }
 
+function smartGuess(min, max){
+  return Math.floor((min + max) /2)
+}
+
 
 start();
 
@@ -28,15 +32,22 @@ async function start() {
   let secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n");
   console.log('You entered: ' + secretNumber);
   //function to generate number to variable
-  let compGuess = randoNumb(min,max)
+  let compGuess = smartGuess(min,max)
   let answer = await ask('Is your number ' + compGuess + "?")
   if(answer === "y") {
     console.log("Whoo hoo! Skynet wins again!!")
     process.exit()
   } else {
     while(answer !== "y") {
-      let hiLow = await ask("Is it higher or lower? ")
-      console.log(hiLow)
+      let hiLow = await ask("Is it higher or lower? (h/l)")
+      if(hiLow === "h"){
+        min = compGuess + 1
+        compGuess = smartGuess(min, max)
+      } else if (hiLow === "l"){
+        max = compGuess - 1
+        compGuess = smartGuess(min, max)
+      }
+      answer = await ask("Is your number " + compGuess + "? ")
     }
   }
 
@@ -44,5 +55,5 @@ async function start() {
 
 
   // Now try and complete the program.
-  //process.exit();
+  process.exit();
 }
