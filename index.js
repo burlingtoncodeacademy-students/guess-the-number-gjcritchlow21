@@ -17,14 +17,14 @@ function randoNumb(min,max) {
   let range = max - min + 1
   return min + Math.floor(Math.random() * range)
 }
-
+// makes the guess efficient by halving the range
 function smartGuess(min, max){
   return Math.floor((min + max) /2)
 }
 
-
+//starts the games
 start();
-
+//async func computer guesses
 async function start() {
   //starting prompt
   console.log("Let's play a game where you (human) make up a number and I (computer) try to guess it.")
